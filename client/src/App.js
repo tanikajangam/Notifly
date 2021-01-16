@@ -8,18 +8,16 @@ import Mission from "./images/mission-img.svg";
 import BookOpened from "./images/book-opened.svg";
 import Curve2 from "./images/curve-2.svg";
 import Curve1 from "./images/curve-1.svg";
+import Microphone from "./images/microphone.svg";
 
-const readOutLoud = (message) => {
-  const speech = new SpeechSynthesisUtterance();
-  speech.volume = 1;
-  speech.rate = 1;
-  speech.pitch = 1;
-  speech.text = message;
-  window.speechSynthesis.speak(speech);
-}
+
 
 function App() {
-  const [transcript, setTranscript] = useState();
+  let [transcript, setTranscript] = useState();
+  let [isRecording, setIsRecording] = useState(false);
+  let [finishedRecording, setFinishedRecording] = useState(false);
+  let [finishedRecordingMessage, setFinishedRecordingMessage] = useState("");
+  let [message, setMessage] = useState(<h1 class = "red">Not Recording.</h1>);
   const content = document.querySelector('.content');
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = new SpeechRecognition();
@@ -28,19 +26,34 @@ function App() {
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
   
-  useEffect(() => {
+const StartRecording = () => {
+  recognition.start();
+  setIsRecording(()=> isRecording = true);
+}
 
+  useEffect(() => {
+  
     recognition.onstart = () => {
       console.log("voice activated");
   }
 
   recognition.onresult = function(event) {
+    setIsRecording(()=> isRecording = false);
+      setFinishedRecording(()=> finishedRecording = true);
       console.log(event);
       const index = event.resultIndex;
       setTranscript(event.results[index][0].transcript);
       console.log(transcript);
-      readOutLoud(transcript);
+    const readOutLoud = () => {
+      const speech = new SpeechSynthesisUtterance();
+      speech.volume = 1;
+      speech.rate = 1;
+      speech.pitch = 1;
+      speech.text = transcript;
+      window.speechSynthesis.speak(speech);
+    }
   }
+
   recognition.onnomatch = function(event) {
       content.innerHTML = 'I didnt recognize that';
     }
@@ -49,6 +62,20 @@ function App() {
     }
 
   });
+  
+
+  useEffect(() => {
+    if(isRecording){
+      setMessage(()=> <h1 class = "green">Listening...</h1>);
+    }
+    else {
+      setMessage(() => <h1 class = "red">Not Recording</h1>);
+    }
+    
+    if(finishedRecording){
+      setFinishedRecordingMessage(() => message = <h1>Edit Your File</h1>);
+    }
+  })
 
   return (
     
@@ -130,10 +157,16 @@ function App() {
   <div className = "convert">
     <div className = "convert-inner">
       <h1>Convert Here:</h1>
-      <button onClick = {() => {recognition.start()}} class ="talk">speak</button>
+      <button onClick = {StartRecording} class ="talk">Speak</button>
+      
     </div>
-    <textarea className = "content" placeholder = "Record Now!">{transcript}</textarea>
-  </div>
+    <div className = "message">{message}</div>
+    <form>
+      {/* <div className = "message">{finishedRecordingMessage}</div> */}
+      <textarea className = "content" placeholder = "Record Now!" value = {transcript}></textarea>
+      <button type = "submit" class = "submit">Save Notes</button>
+    </form>
+      </div>
 
 
   <div className = "footer">

@@ -639,7 +639,38 @@ ul{
     font-family: 'Poppins', sans-serif;
 }
 
+.message{ 
+    display: block;
+    text-align: center;
+}
 ::placeholder{
     color: #bbb;
     font-size: 17px;
+}
+.red{
+    color: rgb(206, 50, 50);
+}
+
+.green{
+    color: rgb(78, 225, 78);
+}
+
+.submit{
+    outline: none;
+    padding: 1rem 2rem;
+    font-size: 20px;
+    background-color: #F0A337;
+    border: none;
+    display: block;
+    transition: all .5s;
+    margin: 0 auto;
+    color: #fff;
+    margin-top: 2rem;
+    transition: all;
+    border-radius: 20px;
+    
+}
+
+.submit:hover{
+    background-color: #cb7b0b;
 }
