@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import axios from 'axios'
 import './App.css';
 import LearnMore from "./images/learn-more.svg"
 import ImgLeft from "./images/img-left.svg";
@@ -8,7 +9,7 @@ import Mission from "./images/mission-img.svg";
 import BookOpened from "./images/book-opened.svg";
 import Curve2 from "./images/curve-2.svg";
 import Curve1 from "./images/curve-1.svg";
-import Microphone from "./images/microphone.svg";
+// import Microphone from "./images/microphone.svg";
 
 
 
@@ -16,6 +17,7 @@ function App() {
   let [transcript, setTranscript] = useState();
   let [isRecording, setIsRecording] = useState(false);
   let [finishedRecording, setFinishedRecording] = useState(false);
+  let [response, setResponse] = useState({});
   let [finishedRecordingMessage, setFinishedRecordingMessage] = useState("");
   let [message, setMessage] = useState(<h1 class = "red">Not Recording.</h1>);
   const content = document.querySelector('.content');
@@ -31,8 +33,15 @@ const StartRecording = () => {
   setIsRecording(()=> isRecording = true);
 }
 
+useEffect(() => {
+  axios.get('/api/v1/say-something').then((res) => {
+    const r = res.data;
+    setResponse(() => response = r);
+  })
+  console.log(response);
+})
+
   useEffect(() => {
-  
     recognition.onstart = () => {
       console.log("voice activated");
   }
