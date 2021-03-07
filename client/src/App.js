@@ -9,12 +9,14 @@ import Mission from "./images/mission-img.svg";
 import BookOpened from "./images/book-opened.svg";
 import Curve2 from "./images/curve-2.svg";
 import Curve1 from "./images/curve-1.svg";
-// import Microphone from "./images/microphone.svg";
-
-
-
+// import Microphone fro
 function App() {
-  let [transcript, setTranscript] = useState();
+  let [data, setData] = useState({
+    class : '', 
+    topic: '', 
+    date: new Date(), 
+  })
+  let [transcript, setTranscript] = useState("");
   let [isRecording, setIsRecording] = useState(false);
   let [finishedRecording, setFinishedRecording] = useState(false);
   let [response, setResponse] = useState({});
@@ -34,11 +36,13 @@ const StartRecording = () => {
 }
 
 useEffect(() => {
-  axios.get('/api/v1/say-something').then((res) => {
-    const r = res.data;
-    setResponse(() => response = r);
-  })
-  console.log(response);
+  fetch("http://localhost:5000/")
+    .then(res => res.text())
+    .then(res => setResponse(()=> 
+    {response = res})
+    )
+    
+    console.log("response is " + response);
 })
 
   useEffect(() => {
@@ -85,6 +89,7 @@ useEffect(() => {
       setFinishedRecordingMessage(() => message = <h1>Edit Your File</h1>);
     }
   })
+
 
   return (
     
@@ -170,9 +175,13 @@ useEffect(() => {
       
     </div>
     <div className = "message">{message}</div>
-    <form>
+    <form method = "post" action='http://localhost:4000/api/'>
       {/* <div className = "message">{finishedRecordingMessage}</div> */}
-      <textarea className = "content" placeholder = "Record Now!" value = {transcript}></textarea>
+      <label for = "class">Class: </label>
+      <input type = "text" id = "class" name = "className"></input>
+      <label for = "topic">Lecture Topic: </label>
+      <input type = "text" id = "topic" name = "topicName"></input>
+      <textarea className = "content" placeholder = "Record Now!"value = {transcript}></textarea>
       <button type = "submit" class = "submit">Save Notes</button>
     </form>
       </div>
