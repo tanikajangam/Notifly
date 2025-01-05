@@ -5,8 +5,8 @@ Notifly is a web-based tool designed to transform the way students engage in lec
 
 **2nd Place Winner at ThetaHacks!**  
 
-🔗 **[Devpost Project Page](https://devpost.com/software/notifly-rfs9eq)**  
-🎥 **[Demo Video](https://www.youtube.com/watch?v=-2hijdgaPiI)**  
+**[Devpost Project Page](https://devpost.com/software/notifly-rfs9eq)**  
+**[Demo Video](https://www.youtube.com/watch?v=-2hijdgaPiI)**  
 
 ---  
 
@@ -46,13 +46,13 @@ Notifly isn't just a mere transcript of a lecture – you can redefine your prod
 
 ---  
 
-## 📽️ Demo  
+## Demo  
 Curious to see it in action? Watch the demo below:  
-🎥 **[Notifly Demo Video](https://www.youtube.com/watch?v=-2hijdgaPiI)**  
+**[Notifly Demo Video](https://www.youtube.com/watch?v=-2hijdgaPiI)**  
 
 ---  
 
-## 🏗️ How to Run It Locally  
+## How to Run It Locally  
 ```bash
 # Clone the repository
 git clone https://github.com/tanikajangam/notifly
