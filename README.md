@@ -1,4 +1,4 @@
-# 📝 Notifly – Your Smart Lecture Assistant  
+# Notifly – A Smart Lecture Assistant  
 
 Notifly is a web-based tool designed to transform the way students engage in lectures by automating note-taking, 
  and allowing them to  focus more on understanding the content rather than frantically writing  everything down.  
@@ -20,7 +20,7 @@ Whether in a traditional or virtual classroom, Notifly aims to enhance learning 
 
 ---  
 
-## 🛠️ How I Built It  
+## How I Built It  
 Notifly leverages a combination of modern web technologies:  
 - **Speech Recognition** – Built using the Web Speech API for real-time transcription.  
 - **Organized Note Storage** – Data is stored and managed using MongoDB and Express.js to ensure easy access and scalability.  
@@ -47,7 +47,7 @@ Notifly isn't just a mere transcript of a lecture – you can redefine your prod
 ---  
 
 ## Demo  
-Curious to see it in action? Watch the demo below:  
+Wanna see it in action? Watch the demo below:  
 **[Notifly Demo Video](https://www.youtube.com/watch?v=-2hijdgaPiI)**  
 
 ---  
